@@ -18,7 +18,7 @@ namespace API.Extensions
             })
             .AddEntityFrameworkStores<DataContext>();
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("EfFxyry7CMxNS9fqEctjTqtFGCZzNA5LtNQRtWeNQvqQabpb5jkcjgCSDup4wQJb"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
@@ -31,7 +31,7 @@ namespace API.Extensions
                         ValidateAudience = false
                     };
                 });
-                
+
             services.AddScoped<TokenService>();
 
             return services;
